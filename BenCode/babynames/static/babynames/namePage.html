@@ -1,0 +1,74 @@
+<html>
+<head>
+	<title>Name Page for DUDE</title>
+<script type="text/javascript" src='jquery.js'></script>
+<link href="jquery-ui-1.8.18.custom/css/humanity/jquery-ui-1.8.18.custom.css" rel="Stylesheet" />
+<script type="text/javascript" src="jquery-ui-1.8.18.custom/js/jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/javascript" src="Highcharts-3.0.1/js/highcharts.js"></script>
+<script type="text/javascript" src='babyChart.js'></script>
+<style type="text/css">
+body{
+	background-color:#FDF6EC;
+}
+#namesearch{
+	
+}
+.square{
+	background-color:#F1AF5E;
+	border-radius:5px;
+	border-width: 2px;
+	border-style: solid;
+	margin-bottom: 20px;
+	padding:5px;
+}
+#main_info{
+	background-color:;
+}
+.graphdiv{
+	width:500px;
+	height:300px;
+}
+</style>
+</head>
+<body>
+<div id="namesearch" class='square'>
+<form name='namesearch'>
+	<label for='namesearchbar'>Name: </label>
+	<input id='namesearchbar'/>
+</form>
+</div>
+<div id="main_info" class='square'>
+	<div class='header_div'><h2 class='main_header'>Name Information for NAMEHERE</h2></div>
+	<div class='body_div'>
+		<p> There were a total of X NAMEHERE's born in South Australia between 1944 and 2012 (Y men and Z women).</p>
+		<p>It hit its peak of popularity in ZZZZ when it was the Rth most
+			popular name for SEX.</p>
+			<p>In this year there were X boys named NAMEHERE and Y girls. That equates to XY per thousand boys and XY per thousand girls!</p>
+	</div>
+</div>
+<div id='graphholder' class='square'>
+	<ul>
+		<li><a href="#tabs-1">Births by Year</a></li>
+		<li><a href="#tabs-2">Age Distribution</a></li>
+	</ul>
+	<div id='tabs-1'><div id='graph1' class='graphdiv'></div></div>
+	<div id='tabs-2'><div id='graph2' class='graphdiv'></div></div>
+</div>
+<div id='extras_holder'>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var avNames=[
+		'Ben',
+		'Bob',
+		'Helena',
+		'Chris'
+	];
+	$("#namesearchbar").autocomplete({
+		source:avNames
+	});
+	$('#graphholder').tabs();
+});
+</script>
+</body>
+</html>

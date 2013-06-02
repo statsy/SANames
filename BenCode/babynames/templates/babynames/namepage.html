@@ -1,0 +1,12 @@
+{% load staticfiles %}
+{% if name_found %}
+	<img src="{% static "babynames/download.jpeg" %}"/>
+	<p>There were {{ name_resp.male_num }} men and {{ name_resp.female_num }} women with the name {{ name }}</p>
+	<ul>
+		{% for name_inst in name_list %}
+			<li>{{ name_inst.year }} saw the birth of {{ name_inst.frequency }}</li>
+		{% endfor %}
+	</ul>
+{% else %}
+	<p> Sorry, could not find an entry for {{ name }}.</p>
+{% endif %}

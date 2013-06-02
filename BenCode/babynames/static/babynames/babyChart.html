@@ -1,0 +1,64 @@
+<html>
+<head>
+	<title>PENIS YEAH</title>
+</head>
+<body>
+<script type="text/javascript" src='jquery.js'></script>
+<script type="text/javascript" src="Highcharts-3.0.1/js/highcharts.js"></script>
+<script type="text/javascript" src='babyChart.js'></script>
+<div id='chart1'></div>
+<div id='chart2'></div>
+</body>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	var info={
+		barry:{
+			'males':{
+				'years':[0,5,2,3,4,5,6],
+				'ages':[6,5,4,3,2,1,0]
+			},
+			'females':{
+				'years':[0,0,0,0,0,0,0],
+				'ages':[0,0,0,0,0,0,0]
+			},
+			'names':['barry']
+		},
+		shazza:{
+			'males':{
+				'years':[0,1,2,3,4,5,6],
+				'ages':[6,5,4,3,2,1,0]
+			},
+			'females':{
+				'years':[0,0,0,0,0,0,0],
+				'ages':[0,0,0,0,0,0,0]
+			},
+			'names':['shazza']
+		},
+	};
+
+	var yearDist={
+		'males':[100,100,100,100,100,100,100],
+		'females':[200,200,200,200,200,200,200]
+	};
+
+	var newInfo={
+		'sergei':{
+			'males':{
+				'years':[0,52,2,3,4,5,6],
+				'ages':[6,5,43,3,2,1,0]
+			},
+			'females':{
+				'years':[0,0,0,0,0,0,0],
+				'ages':[0,0,0,0,0,0,0]
+			},
+			'names':['sergei']
+		}
+	}
+	var dudey=new babyCharter('chart1','chart2',info,yearDist);
+
+	dudey.addSeries(newInfo);
+
+	dudey.removeSeries(['barry','shazza']);
+});
+</script>
+</html>

@@ -1,0 +1,97 @@
+{% load staticfiles %}
+{% load humanize %}
+<html>
+<head>
+	<title>Name Page for DUDE</title>
+<script type="text/javascript" src="{% static "babynames/jquery.js" %}"></script>
+<link href="{% static "babynames/jquery-ui-1.8.18.custom/css/humanity/jquery-ui-1.8.18.custom.css" %}" rel="Stylesheet" />
+<script type="text/javascript"  src="{% static "babynames/jquery-ui-1.8.18.custom/js/jquery-ui-1.8.18.custom.min.js" %}"></script>
+<script type="text/javascript" src="{% static "babynames/Highcharts-3.0.1/js/highcharts.js" %}"></script>
+<script type="text/javascript" src="{% static "babynames/babyChart.js" %}"></script>
+<style type="text/css">
+body{
+	background-color:#FDF6EC;
+}
+#namesearch{
+	
+}
+.square{
+	background-color:#F1AF5E;
+	border-radius:5px;
+	border-width: 2px;
+	border-style: solid;
+	margin-bottom: 20px;
+	padding:5px;
+}
+#main_info{
+	background-color:;
+}
+.graphdiv{
+	width:1000px;
+	height:400px;
+}
+.tabs{
+	height:500px;
+}
+</style>
+</head>
+<body>
+<div id="namesearch" class='square'>
+	<label for='namesearchbar'>Name: </label>
+	<input id='namesearchbar'/>
+</div>
+<div id="main_info" class='square'>
+	<div class='header_div'><h2 class='main_header'>Name Information for {{ name|lower|capfirst }}</h2></div>
+	<div class='body_div'>
+		<p> There were a total of {{ name_resp.total_num }} babies named {{ name|lower|capfirst }} born in South Australia between 1944 and 2012 ({{ name_resp.male_num }} men and {{ name_resp.female_num }} women).</p>
+		<p>It hit its peak of popularity in {{ most_popular.year_val }} when it was the {{ most_popular.rank|ordinal }} most
+			popular name for {{ popSex }}.</p>
+	</div>
+</div>
+<div id='graphholder' class='square'>
+	<ul>
+		<li><a href="#tabs-1">Births by Year</a></li>
+		<li><a href="#tabs-2">Current Ages</a></li>
+		<li><a href="#tabs-3">Popularity Ranking</a></li>
+	</ul>
+	<div id='tabs-1' class='tabs'><div id='graph1' class='graphdiv'></div></div>
+	<div id='tabs-2' class='tabs'><div id='graph2' class='graphdiv'></div></div>
+	<div id='tabs-3' class='tabs'><div id='graph3' class='graphdiv'></div></div>
+</div>
+<div id='extras_holder'>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var avNames=[
+	];
+	$("#namesearchbar").autocomplete({
+		source:avNames,
+		select: function(event,ui){
+			var selectName=ui.item.label;
+			console.log(selectName);
+			//window.location="127.0.0.1:8000/babynames/namepage/"+selectName+"/";
+		}
+	});
+
+	$("#namesearchbar").on("keypress",function(event){
+		if(event.which==13){
+			var selectName=$("#namesearchbar").val();
+			location.replace("http://127.0.0.1:8000/babynames/namepage/"+selectName+"/");
+		}
+	})
+	$('#graphholder').tabs();
+
+	var requestName="{{ name }}"
+
+	var yearDist={
+		'males':[ {% for num in male_dic %} {{ num }}, {% endfor %}],
+		'females':[ {% for num in female_dic %} {{ num }}, {% endfor %}]
+	};
+
+	var dudey=new babyCharter('graph1','graph2','graph3','OHISEE',yearDist);
+
+	dudey.initChart("{{ name }}");
+});
+</script>
+</body>
+</html>
